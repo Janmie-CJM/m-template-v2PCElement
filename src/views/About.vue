@@ -5,6 +5,10 @@
       <p @click="showMore(item,index)">{{item.label}}</p>
       <tree v-if="item.children && item.isShow" :parentList="item.children"></tree>
     </div>
+
+    <div>
+      <el-input-number></el-input-number>
+    </div>
   </div>
 </template>
 
