@@ -2,17 +2,17 @@ import Cookies from 'js-cookie'
 
 const TokenKey = 'Admin-Token'
 
-// 获取 Token
+// 获取cookie中存起的 Token
 export function getToken() {
   return Cookies.get(TokenKey)
 }
 
-// 设置 Token
+// 把 Token 存到cookie中
 export function setToken(token) {
   return Cookies.set(TokenKey,token)
 }
 
-// 移除 Token
+// 移除cookie中保存的 Token
 export function removeToken() {
   return Cookies.remove(TokenKey)
 }

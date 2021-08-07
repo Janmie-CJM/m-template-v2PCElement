@@ -12,11 +12,15 @@
 
       <el-button @click="handleReset">resetFields</el-button>
       <el-button :loading="loading" @click="handleSubmit">提交</el-button>
+      <tool-jsoncode :title="'token'" :dataInfo="$store.getters.token"></tool-jsoncode>
+      <tool-jsoncode :title="'axiosResponse'" :dataInfo="$store.getters.axiosResponse"></tool-jsoncode>
+      <tool-jsoncode :title="'axiosConfig'" :dataInfo="$store.getters.axiosResponse"></tool-jsoncode>
     </el-form>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'Login',
   data() {
@@ -37,7 +41,8 @@ export default {
   },
   components: {},
   watch: {},
-  computed: {},
+  computed: {
+  },
   mounted() {},
   methods: {
     // 登录
@@ -45,23 +50,33 @@ export default {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.loading = true
-          console.log('valid')
-          this.$store.dispatch('user/login', this.loginForm)
-            .then(()=>{
-              this.$router.push({ path: this.redirect || '/' })
+          this.$store
+            .dispatch('user/login', this.loginForm) // 通过username、password获取token，更新vuex及cookie中token值
+            .then(() => {
+              // this.$router.push({ path: this.redirect || '/' })
               this.loading = false
             })
             .catch(() => {
               this.loading = false
             })
         } else {
-          console.log('validate failed')
+          console.log('提交失败！！！')
           return false
         }
       })
     },
     handleReset() {
       this.$refs.loginForm.resetFields()
+      const h = this.$createElement
+      this.$message({
+        message: h('p', null, [h('h1', { style: 'color:red' }, '你好'), h('i', { style: 'color:blue' }, 'abc')]),
+        type: 'info',
+        showClose: true,
+        duration: 1000,
+        onClose: (action) => {
+          console.log('action', action)
+        },
+      })
     },
   },
 }
