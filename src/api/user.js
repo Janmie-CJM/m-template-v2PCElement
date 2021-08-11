@@ -8,3 +8,12 @@ export function login(data) {
     data
   })
 }
+
+// getInfo —— 携带token去获取用户信息
+export function getInfo(token) {
+  return request({
+    url: '/vue-element-admin/user/info',
+    methods: 'get',
+    params: { token }
+  })
+}

@@ -9,6 +9,10 @@
 <script>
 export default {
   name: 'ToolJsoncode',
+  model:{
+    prop: 'dataInfo',
+    event: 'change'
+  },
   props: {
     dataInfo: {
       type: [String,Object],

@@ -45,15 +45,14 @@ export default {
   },
   mounted() {},
   methods: {
-    // 登录
+    // 登录(保存tiken、配置axios、重定向)
     handleSubmit() {
-      this.$refs.loginForm.validate((valid) => {
+      this.$refs.loginForm.validate((valid, error) => {
         if (valid) {
           this.loading = true
-          this.$store
-            .dispatch('user/login', this.loginForm) // 通过username、password获取token，更新vuex及cookie中token值
+          this.$store.dispatch('user/login', this.loginForm) // 通过username、password获取token，更新vuex及cookie中token值
             .then(() => {
-              // this.$router.push({ path: this.redirect || '/' })
+              this.$router.push({ path: this.redirect || '/' })
               this.loading = false
             })
             .catch(() => {
@@ -61,10 +60,12 @@ export default {
             })
         } else {
           console.log('提交失败！！！')
+          // console.log('error',error)
           return false
         }
       })
     },
+    // 重置账号密码
     handleReset() {
       this.$refs.loginForm.resetFields()
       const h = this.$createElement
