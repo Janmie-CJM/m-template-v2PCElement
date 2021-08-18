@@ -10,7 +10,6 @@ const state = {
   // 拦截器response、request(方便在页面看，后期可以删除)
   axiosConfig: null,
   axiosResponse: null,
-  
 }
 
 const mutations = {
